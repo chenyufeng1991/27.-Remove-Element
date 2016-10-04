@@ -16,35 +16,20 @@ int removeElement(vector<int>& nums, int val)
     sort(nums.begin(), nums.end());
     long length = nums.size();
 
-    long startIndex = 0, endIndex = nums.size() - 1;
-    bool isStartFind = false,isEndFind = false;
-    for (long i = 0; i < nums.size(); i++)
+    vector<int>::iterator ite = nums.begin();
+    for (long i = 0; i < length;)
     {
         if (nums[i] == val)
         {
-            startIndex = i;
-            isStartFind = true;
-            break;
+            nums.erase(ite);
+            length--;
+            continue;
         }
-    }
-    for (long i = nums.size() - 1; i >= 0; i--)
-    {
-        if (nums[i] == val)
-        {
-            endIndex = i;
-            isEndFind = true;
-            break;
-        }
+        i++;
+        ite++;
     }
 
-    if (isStartFind && isEndFind)
-    {
-        return (int)(length - (endIndex - startIndex + 1));
-    }
-    else
-    {
-        return (int)length;
-    }
+    return (int)length;
 }
 
 int main(int argc, const char * argv[])
